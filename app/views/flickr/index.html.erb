@@ -1,0 +1,23 @@
+<div class="content">
+	<div class="container-fluid">
+		<div class="row-fluid">
+			<div class="search-container text-center">
+				<h1 class="logo text-center">
+					Search Flickr.com Photos
+				</h1>
+				<div>
+					<form action="<%= url_for :controller => "flickr", :action => "search" %>" class="form-inline" method="get">
+						<div class="form-group" style="display:inline;">
+							<div class="input-group col-xs-12 col-md-6 col-xs-offset-0 col-md-offset-1">
+								<input type="text" class="form-control" placeholder="Enter title, description or tags" name="search_term" id="search_term" value="<%= params[:search_term] %>" />
+								<span class="input-group-btn text-left">
+									<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+								</span>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,46 @@
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+	<div class="container">
+		<div class="row">
+			<div class="navbar-header">
+				<button class="navbar-toggle collapsed" data-target="#search-navbar-collapse-1" data-toggle="collapse" type="button">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse" id="search-navbar-collapse-1">
+				<form action="<%= url_for :action => "search" %>" class="navbar-form" onsubmit="return(document.getElementById('search_term').value != '');">
+					<div class="form-group" style="display:inline;">
+						<div class="input-group col-md-6">
+							<input type="text" class="form-control" placeholder="Enter title, description or tags" name="search_term" id="search_term" value="<%= params[:search_term] %>" />
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+							</span>
+						</div>
+					</div>
+				</form>
+				
+			</div>
+		</div>
+	</div>
+</nav>
+<div class="container text-right" style="margin-bottom: 18px;">
+	<%= page_entries_info @photo_result, :model => "Flickr '#{params[:search_term]}' photos" %>
+</div>
+<div class="container">
+	<div class="row">
+		<% @photo_result.each do |photo| %>
+			<div class="col-lg-2 col-md-3 col-xs-4 thumb">
+				<a class="thumbnail" href="<%= photo.url(:large) %>" data-toggle="lightbox" data-title="<%= photo.title %>">
+					<img class="img-responsive" src="<%= photo.url(:medium) %>" alt="<%= photo.title %>">
+				</a>
+			</div>
+		<% end %>
+	</div>
+	<div class="row text-center">
+		<% if @photo_result %>
+			<%= will_paginate @photo_result, renderer: BootstrapPagination::Rails %>
+		<% end %>
+	</div>
+</div>
